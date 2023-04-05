@@ -1,0 +1,54 @@
+﻿<Window x:Class="Deposit_calc.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Deposit_calc.ViewModels"
+        mc:Ignorable="d"
+            Title="Депозитний калькулятор" Height="700" Width="1025" MinHeight="700" MinWidth="1025">
+    <Window.DataContext>
+        <vm:DepositViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Skin/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Window.Background>
+        <ImageBrush ImageSource="/021_WallpapersAmazingCar_010609_Go2LoadCOM.jpg"/>
+    </Window.Background>
+    <Grid Margin="10" x:Name="CalcGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Button  Content="Змінити скін" Grid.Row="0" Grid.Column="1" Margin="0,5" Opacity="1" Style="{DynamicResource GlassButtonOne}" Click="Button_Click"/>
+        <TextBlock Text="Сума вкладу:" Grid.Row="1" Grid.Column="0" Margin="0,5" FontSize="24" Foreground="White" FontWeight="Bold"/>
+        <TextBox  x:Name="depositAmountTextBox" Text="{Binding DepositAmount}" Grid.Row="1" Grid.Column="1" Margin="5" Style="{DynamicResource GlassTextBoxOne}"/>
+        <TextBlock Text="Процентна ставка (%):" Grid.Row="2" Grid.Column="0" Margin="0,5" FontSize="24" Foreground="White" FontWeight="Bold"/>
+        <TextBox Style="{DynamicResource GlassTextBoxOne}" x:Name="interestRateTextBox" Text="{Binding AnnualInterestRate}" Grid.Row="2" Grid.Column="1" Margin="5"/>
+        <TextBlock Text="Термін вкладу (міс.):" Grid.Row="3" Grid.Column="0" Margin="0,5" FontSize="24" Foreground="White" FontWeight="Bold"/>
+        <TextBox x:Name="termTextBox" Style="{DynamicResource GlassTextBoxOne}" Text="{Binding DepositTermInMonths}" Grid.Row="3" Grid.Column="1" Margin="5"/>
+        <TextBlock Text="Валюта:" Grid.Row="4" Grid.Column="0" Margin="0,5" FontSize="24" Foreground="White" FontWeight="Bold"/>
+        <ComboBox  Style="{DynamicResource ComboBoxStyle}" ItemsSource="{Binding Currencies}" SelectedItem="{Binding SelectedCurrency}" Grid.Row="4" Grid.Column="1" Margin="5" Name="crrencyComboBox" />
+        <RadioButton Style="{DynamicResource RadioButtonStyle}" x:Name="monthlyInterestRadioButton" IsChecked="{Binding UseMonthlyPayment}" Content="Щомісячне нарахування" Grid.Row="5" Grid.Column="1" Margin="5" FontSize="24" FontWeight="Bold"/>
+        <RadioButton x:Name="capitalisationRadioButton" Style="{DynamicResource RadioButtonStyle}" IsChecked="{Binding Capitalization}" Content="Капітализація" Grid.Row="5" Grid.Column="0" Margin="5" FontSize="24" FontWeight="Bold"/>
+        <TextBlock Text="Ітогова сума в обраній валюті:" Grid.Row="6" Grid.Column="0" Margin="0,5" FontSize="24" Foreground="White" FontWeight="Bold"/>
+        <TextBox x:Name="totalAmountTextBlock" Style="{DynamicResource GlassTextBoxOne}" Text="{Binding TotalAmount}" Grid.Row="6" Grid.Column="1" Margin="5"/>
+        <TextBlock Text="Ітогова сума в гривні:" Grid.Row="7" Grid.Column="0" Margin="0,5" FontSize="24" Foreground="White" FontWeight="Bold"/>
+        <TextBox Style="{DynamicResource GlassTextBoxOne}" x:Name="totalAmountTextBlockAfterExchange" Text="{Binding TotalAmountExchange}" Grid.Row="7" Grid.Column="1" Margin="5"/>
+    </Grid>
+</Window>
+
